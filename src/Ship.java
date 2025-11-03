@@ -5,6 +5,7 @@ public class Ship {
     private final int size;
     private final List<int[]> coordinates;
     private int hits;
+    private boolean sunkAnnounced = false;
 
     public Ship(int size) {
         this.size = size;
@@ -30,5 +31,13 @@ public class Ship {
 
     public boolean isSunk() {
         return hits >= size;
+    }
+
+    public boolean isSunkAnnounced() {
+        return sunkAnnounced;
+    }
+
+    public void setSunkAnnounced() {
+        sunkAnnounced = true;
     }
 }

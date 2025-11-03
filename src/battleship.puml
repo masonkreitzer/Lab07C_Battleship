@@ -1,0 +1,73 @@
+@startuml
+
+class Main {
+    - frame: JFrame
+    - board: Board
+    - missCounterLabel: JLabel
+    - strikeCounterLabel: JLabel
+    - totalMissLabel: JLabel
+    - totalHitLabel: JLabel
+    - missCounter: int
+    - strikeCounter: int
+    - totalMiss: int
+    - totalHit: int
+    + Main()
+    + main(args: String[])
+    - getJPanel(): JPanel
+    - handleClick(btn: CellButton): void
+    - updateStatus(): void
+    - playAgain(): void
+    - quitGame(): void
+}
+
+class Board {
+    + SIZE: int = 10
+    - grid: CellState[][]
+    - ships: List<Ship>
+    - random: Random
+    + Board()
+    + getCell(row: int, col: int): CellState
+    + setCell(row: int, col: int, state: CellState): void
+    + getShips(): List<Ship>
+    + placeShips(shipSizes: int[]): void
+    - canPlaceShip(row: int, col: int, size: int, horizontal: boolean): boolean
+    + fire(row: int, col: int): boolean
+}
+
+class Ship {
+    - size: int
+    - coordinates: List<int[]>
+    - hits: int
+    - sunkAnnounced: boolean
+    + Ship(size: int)
+    + getSize(): int
+    + addCoordinate(row: int, col: int): void
+    + getCoordinates(): List<int[]>
+    + registerHit(): void
+    + isSunk(): boolean
+    + isSunkAnnounced(): boolean
+    + setSunkAnnounced(): void
+}
+
+class CellButton extends JButton {
+    - row: int
+    - col: int
+    - board: Board
+    + CellButton(row: int, col: int, board: Board)
+    + getRow(): int
+    + getCol(): int
+    + updateDisplay(): void
+}
+
+enum CellState {
+    BLANK
+    MISS
+    HIT
+}
+
+Main --> Board
+Main --> CellButton
+Board --> Ship
+CellButton --> Board
+
+@enduml
