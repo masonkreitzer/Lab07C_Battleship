@@ -1,5 +1,5 @@
-public class CellState {
-    public static void main(String[] args) {
-
-    }
+public enum CellState {
+    BLANK,
+    MISS,
+    HIT
 }
